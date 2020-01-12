@@ -15,7 +15,7 @@ var loadingTask = pdfjsLib.getDocument(url);
 loadingTask.onProgress = (progressData) => {
     const percentage = document.getElementById('percentage');
     if (progressData.loaded === progressData.total) {
-        percentage.parentNode.removeChild(percentage);
+        // percentage.parentNode.removeChild(percentage);
         return;
     }
     if (percentage) {
