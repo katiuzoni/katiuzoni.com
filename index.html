@@ -18,7 +18,9 @@ loadingTask.onProgress = (progressData) => {
         percentage.parentNode.removeChild(percentage);
         return;
     }
-    percentage && percentage.innerHTML = (progressData.loaded / progressData.total) * 100
+    if (percentage) {
+        percentage.innerHTML = (progressData.loaded / progressData.total) * 100
+    }
 }
 loadingTask.promise.then(function(pdf) {
   console.log('PDF loaded');
