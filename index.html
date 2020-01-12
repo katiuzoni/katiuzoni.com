@@ -12,7 +12,14 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.w
 
 // Asynchronous download of PDF
 var loadingTask = pdfjsLib.getDocument(url);
-loadingTask.onProgress = console.log;
+loadingTask.onProgress = (progressData) => {
+    const percentage = document.getElementById('percentage');
+    if (progressData.loaded === progressData.total) {
+        percentage.parentNode.removeChild(percentage);
+        return;
+    }
+    percentage && percentage.innerHTML = (progressData.loaded / progressData.total) * 100
+}
 loadingTask.promise.then(function(pdf) {
   console.log('PDF loaded');
   
@@ -47,6 +54,7 @@ loadingTask.promise.then(function(pdf) {
 </script>
 
 <canvas id="the-canvas"></canvas>
+<h1><span id="percentage"></span> %</h1>
 
 <style>
     body {
