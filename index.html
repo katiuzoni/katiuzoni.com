@@ -12,6 +12,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.w
 
 // Asynchronous download of PDF
 var loadingTask = pdfjsLib.getDocument(url);
+loadingTask.onProgress = console.log;
 loadingTask.promise.then(function(pdf) {
   console.log('PDF loaded');
   
@@ -45,7 +46,7 @@ loadingTask.promise.then(function(pdf) {
 });
 </script>
 
-<canvas id="the-canvas">Loading...</canvas>
+<canvas id="the-canvas"></canvas>
 
 <style>
     body {
